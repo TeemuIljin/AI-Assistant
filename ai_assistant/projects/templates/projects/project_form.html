@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if object %}Edit Project{% else %}Add Project{% endif %}</title>
+</head>
+<body>
+    <h1>{% if object %}Edit Project{% else %}Add Project{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'project_list' %}">Cancel</a>
+</body>
+</html>

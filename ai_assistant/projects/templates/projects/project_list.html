@@ -5,11 +5,14 @@
 </head>
 <body>
     <h1>Project List</h1>
+    <a href="{% url 'project_add' %}">Add New Project</a>
     <ul>
         {% for project in projects %}
-            <li>{{ project.name }} - {{ project.description }}</li>  <!-- Display project name and description -->
-        {% empty %}
-            <li>No projects available.</li>  <!-- Display a message if there are no projects -->
+            <li>
+                <a href="{% url 'project_detail' project.id %}">{{ project.name }}</a>
+                (<a href="{% url 'project_edit' project.id %}">Edit</a> |
+                <a href="{% url 'project_delete' project.id %}">Delete</a>)
+            </li>
         {% endfor %}
     </ul>
 </body>
