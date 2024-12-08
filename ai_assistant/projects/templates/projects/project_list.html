@@ -7,7 +7,9 @@
     <h1>Project List</h1>
     <ul>
         {% for project in projects %}
-            <li>{{ project.name }} - {{ project.description }}</li>
+            <li>{{ project.name }} - {{ project.description }}</li>  <!-- Display project name and description -->
+        {% empty %}
+            <li>No projects available.</li>  <!-- Display a message if there are no projects -->
         {% endfor %}
     </ul>
 </body>
