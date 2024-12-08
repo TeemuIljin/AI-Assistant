@@ -20,7 +20,7 @@ High-Level Overview of the AI Assistant Project
    - Environment: Python, virtual environments, and GitHub for version control
 
 
-What I have Accomplished so far (7.12)
+What I have Accomplished so far (8.12)
 
 1. Set Up the Project:
    - Installed Python, Django, and created a virtual environment.
@@ -36,6 +36,12 @@ What I have Accomplished so far (7.12)
    - Created an app called "projects" for managing tasks.
    - Defined a `Project` model and migrated it to the database.
    - Registered the model with Django admin.
+     
+4. Made the app interactive
+   - project deletion, adding and editing possible
+   - css file created for future
+   - views and folders created
+   - Made detailed descriptions and dates for tasks and projects
 
 Detailed Roadmap
 
@@ -57,7 +63,7 @@ Steps Completed:
 
 
 
-Phase 2: Core Functionality – Task Management
+Phase 2: Core Functionality – Task Management (Complete) (8.12)
 
 Objective: 
 Building a feature-rich task management system with CRUD (Create, Read, Update, Delete) operations.
