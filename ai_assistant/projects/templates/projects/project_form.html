@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>{% if object %}Edit Project{% else %}Add Project{% endif %}</title>
+     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'projects/style.css' %}">
 </head>
 <body>
     <h1>{% if object %}Edit Project{% else %}Add Project{% endif %}</h1>

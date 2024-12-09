@@ -3,15 +3,23 @@ body {
     font-family: Arial, sans-serif;
     font-size: larger;
 }
+
 h1 {
     font-family: Arial, sans-serif;
     background-color: #171736;
       text-align: center;
       padding: 20px 0;
+    color: #055e08;
 }
 h2 {
     font-family: Arial, sans-serif;
     background-color: #171736;
+}
+p {
+    color: #055e08;
+}
+a {
+    color: #055e08;
 }
 
 ul {
