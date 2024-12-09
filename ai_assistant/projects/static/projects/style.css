@@ -1,4 +1,42 @@
 body {
-    background-color: lightblue; /* Change this to any color you like */
+    background-color: #171736;
     font-family: Arial, sans-serif;
+    font-size: larger;
+}
+h1 {
+    font-family: Arial, sans-serif;
+    background-color: #171736;
+      text-align: center;
+      padding: 20px 0;
+}
+h2 {
+    font-family: Arial, sans-serif;
+    background-color: #171736;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+
+li:hover {
+    background-color: #f1f1f1;
 }
