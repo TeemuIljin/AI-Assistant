@@ -17,17 +17,24 @@ class ProjectCreateView(CreateView):
     model = Project
     template_name = 'projects/project_form.html'
     fields = ['name', 'description', 'start_date', 'end_date', 'completed']
-    success_url = reverse_lazy('project_list')  # Redirect to the project list after creating
+    success_url = reverse_lazy('project_list')
 
 # Edit an existing project
 class ProjectUpdateView(UpdateView):
     model = Project
     template_name = 'projects/project_form.html'
     fields = ['name', 'description', 'start_date', 'end_date', 'completed']
-    success_url = reverse_lazy('project_list')  # Redirect to the project list after editing
+    success_url = reverse_lazy('project_list')
 
 # Delete a project
 class ProjectDeleteView(DeleteView):
     model = Project
     template_name = 'projects/project_confirm_delete.html'
-    success_url = reverse_lazy('project_list')  # Redirect to the project list after deleting
+    success_url = reverse_lazy('project_list')
+
+from django.shortcuts import render
+from .models import Project
+
+def project_list(request):
+    projects = Project.objects.all()
+    return render(request, 'projects/project_list.html', {'projects': projects})

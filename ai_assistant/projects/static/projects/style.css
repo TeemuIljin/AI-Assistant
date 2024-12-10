@@ -1,26 +1,45 @@
+title{
+    color: #6dcbfc;
+}
 body {
     background-color: #171736;
     font-family: Arial, sans-serif;
     font-size: larger;
+    color: #fff;
+    margin: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+h1, h2 {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px 0;
+    color: #fff;
+    margin: 0;
 }
 
 h1 {
-    font-family: Arial, sans-serif;
-    background-color: #171736;
-      text-align: center;
-      padding: 20px 0;
-    color: #055e08;
+
+    font-size: 2.5em;
+    color: #fff;
+    padding: 20px;
 }
+
 h2 {
-    font-family: Arial, sans-serif;
     background-color: #171736;
+    font-size: 2em;
+    padding: 20px;
 }
+
+
 p {
-    color: #055e08;
+    color: #fff;
+    line-height: 1.6;
+    margin: 10px 0;
+    padding: 20px;
 }
-a {
-    color: #055e08;
-}
+
 
 ul {
     list-style: none;
@@ -33,18 +52,90 @@ ul {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
 li {
-    padding: 15px;
+    padding: 20px;
     border-bottom: 1px solid #ddd;
     font-size: 16px;
+    color: #171736;
+
 }
 
 li:last-child {
     border-bottom: none;
 }
 
-
 li:hover {
     background-color: #f1f1f1;
+    color: #171736;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+input, textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #f9f9f9;
+}
+
+
+.content {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #003366;
+    padding: 10px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff !important;
+    font-size: 1.5em;
+}
+
+.nav-link {
+    color: #ccc !important;
+    transition: color 0.3s ease;
+    font-size: 1.1em;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+}
+
+/* Containers */
+.container {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #232359;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.list-group-item a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.list-group-item a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+h3 {
+    color: #0f0f0f;
 }
