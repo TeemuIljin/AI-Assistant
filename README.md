@@ -1,5 +1,6 @@
 Ideana rakentaa AI apuri tietokantoihin ja opintojen tuelle.
-Tässä suunnitelma projektille / Here is the roadmap for the project. Built (8.12) and will be updated as I progress!
+Tässä suunnitelma projektille / Here is the roadmap for the project. Built (8.12) and will be updated as I progress! 
+(Updated 11.12)
 
 
 High-Level Overview of the AI Assistant Project
@@ -20,7 +21,7 @@ High-Level Overview of the AI Assistant Project
    - Environment: Python, virtual environments, and GitHub for version control
 
 
-What I have Accomplished so far (8.12)
+What I have Accomplished so far (11.12)
 
 1. Set Up the Project:
    - Installed Python, Django, and created a virtual environment.
@@ -36,12 +37,21 @@ What I have Accomplished so far (8.12)
    - Created an app called "projects" for managing tasks.
    - Defined a `Project` model and migrated it to the database.
    - Registered the model with Django admin.
+   - Ingrated urls
+   - 
      
 4. Made the app interactive
    - project deletion, adding and editing possible
    - css file created for future
    - views and folders created
    - Made detailed descriptions and dates for tasks and projects
+     
+5. Advanced the database
+   - Made the app secure and added indidual users to have unique views and logins
+   - Owner can access everything using django superuser and give out login codes
+   - Significant updates to css and html files (navbar, links and functionality)
+
+6. (Starting AI integration on 11.12)
 
 Detailed Roadmap
 
@@ -60,7 +70,6 @@ Steps Completed:
 4. Defined a database schema for `Project` and migrated it.
 5. Tested the server to ensure the project runs locally.
 6. Successfully pushed code to GitHub.
-
 
 
 Phase 2: Core Functionality – Task Management (Complete) (8.12)
@@ -93,7 +102,7 @@ Steps:
    - Use Django admin to verify the database content.
 
 
-Phase 3: User Authentication and Authorization
+Phase 3: User Authentication and Authorization (Complete) (10.12)
 
 Objective:
 Securing the system by allowing users to manage only their own tasks.
@@ -131,7 +140,7 @@ Steps:
    - Allow the AI to provide task suggestions or summarize overdue tasks.
    - Example: “You have 3 overdue tasks. Would you like to reschedule them?”
 
----
+
 
 Phase 5: Advanced Features
 
@@ -162,16 +171,14 @@ Timeline
 
 Phase                     	 Estimated Time 
 Foundation	Complete
-Task management	2-3 days
-User authentication	2-3 days
+Task management	Complete
+User authentication	Complete
 AI integration	3-4 days
 Advanced features	4+  days
 Deployment	1-2 days
 
 
-Next?
 
-Task management feature! :)
 
 1. Finalizing the `Task` model and migrating it.
 2. Creating views and templates for CRUD operations.
