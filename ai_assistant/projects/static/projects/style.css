@@ -97,7 +97,7 @@ input, textarea {
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #003366;
-    padding: 10px;
+    padding: 15px;
 }
 
 .navbar-brand {
@@ -120,7 +120,7 @@ input, textarea {
 .container {
     margin-top: 20px;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 7px;
     background-color: #232359;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -133,7 +133,7 @@ input, textarea {
 }
 
 .list-group-item a:hover {
-    color: #0056b3;
+    color: #15588f;
     text-decoration: underline;
 }
 h3 {

@@ -12,7 +12,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+
 from decouple import Config, Csv
+
+# Initialize the Config object without search_path argument
+config = Config()
+
+# Access environment variables from .env file
+SECRET_KEY = config('SECRET_KEY')
+API_KEY = config('API_KEY')
+
+
+
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
