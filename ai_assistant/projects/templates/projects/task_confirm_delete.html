@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Task - AI Assistant{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-exclamation-triangle"></i> Delete Task
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <strong>Warning:</strong> This action cannot be undone!
+                </div>
+                
+                <p>Are you sure you want to delete the task <strong>"{{ task.title }}"</strong>?</p>
+                
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title">Task Details:</h6>
+                        <p class="card-text mb-1"><strong>Project:</strong> {{ task.project.name }}</p>
+                        {% if task.description %}
+                            <p class="card-text mb-1"><strong>Description:</strong> {{ task.description|truncatewords:20 }}</p>
+                        {% endif %}
+                        <p class="card-text mb-1"><strong>Priority:</strong> 
+                            <span class="badge bg-{{ task.priority_color }}">
+                                {{ task.get_priority_display }}
+                            </span>
+                        </p>
+                        {% if task.assigned_to %}
+                            <p class="card-text mb-1"><strong>Assigned to:</strong> {{ task.assigned_to.username }}</p>
+                        {% endif %}
+                        {% if task.due_date %}
+                            <p class="card-text mb-1"><strong>Due Date:</strong> {{ task.due_date|date:"F d, Y" }}</p>
+                        {% endif %}
+                        <p class="card-text mb-0"><strong>Status:</strong> 
+                            <span class="badge {% if task.completed %}bg-success{% else %}bg-warning{% endif %}">
+                                {% if task.completed %}Completed{% else %}Pending{% endif %}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'projects:project_detail' task.project.pk %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Yes, Delete Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

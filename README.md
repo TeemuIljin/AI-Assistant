@@ -1,186 +1,219 @@
-Ideana rakentaa AI apuri tietokantoihin ja opintojen tuelle.
-Tässä suunnitelma projektille / Here is the roadmap for the project. Built (8.12) and will be updated as I progress! 
-(Updated 11.12)
+# AI Assistant - Project Management System
 
+A modern Django-based project management application with task tracking capabilities.
 
-High-Level Overview of the AI Assistant Project
+## Features
 
-1. Goal is to create an AI-powered assistant that helps users with task management and provides additional intelligent features.
+- **Project Management**: Create, edit, and delete projects with detailed information
+- **Task Tracking**: Add tasks to projects with priority levels and due dates
+- **User Management**: Assign tasks to users and track project ownership
+- **Search & Filtering**: Find projects and tasks quickly with advanced filtering
+- **Progress Tracking**: Visual progress bars and completion statistics
+- **Responsive Design**: Modern UI that works on all devices
+- **Admin Interface**: Comprehensive admin panel for data management
 
-2. Core Features:
-   - Task management: Users can create, view, edit, and delete tasks.
-   - AI integration: ChatGPT-like assistant for answering questions or helping users organize their work.
-   - User authentication: Each user has their own account and can manage personal tasks.
-   - Notifications and reminders: Notify users of due tasks or events.
+## Technology Stack
 
-3. Tech Stack:
-   - Backend: Django (Python framework)
-   - Database: SQLite (development) or PostgreSQL (production)
-   - Frontend: Basic templates with Django or advanced UI with React.js
-   - AI Integration: OpenAI API or a custom-trained machine learning model
-   - Environment: Python, virtual environments, and GitHub for version control
+- **Backend**: Django 5.1.4
+- **Frontend**: Bootstrap 5.3, HTML5, CSS3
+- **Database**: SQLite (configurable for PostgreSQL/MySQL)
+- **API**: Django REST Framework
+- **Authentication**: Django's built-in authentication system
 
+## Installation
 
-What I have Accomplished so far (11.12)
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd ai-assistant
+   ```
 
-1. Set Up the Project:
-   - Installed Python, Django, and created a virtual environment.
-   - Initialized a Django project named "ai_assistant".
-   - Pushed your code to GitHub for version control.
+2. **Create a virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-2. Configured the Development Environment:
-   - Verified Django installation.
-   - Created a superuser for the Django admin panel.
-   - Configured and tested the development server to ensure it runs properly.
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. Started the Task Management App:
-   - Created an app called "projects" for managing tasks.
-   - Defined a `Project` model and migrated it to the database.
-   - Registered the model with Django admin.
-   - Ingrated urls
-   - 
-     
-4. Made the app interactive
-   - project deletion, adding and editing possible
-   - css file created for future
-   - views and folders created
-   - Made detailed descriptions and dates for tasks and projects
-     
-5. Advanced the database
-   - Made the app secure and added indidual users to have unique views and logins
-   - Owner can access everything using django superuser and give out login codes
-   - Significant updates to css and html files (navbar, links and functionality)
+4. **Set up environment variables**
+   ```bash
+   cp env.example .env
+   # Edit .env with your configuration
+   ```
 
-6. (Starting AI integration on 11.12)
+5. **Run migrations**
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
 
-Detailed Roadmap
+6. **Create a superuser**
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-Phase 1: Foundation (Complete) (7.12)
+7. **Run the development server**
+   ```bash
+   python manage.py runserver
+   ```
 
-- Tools Used:
-  - Django: Framework for building the backend.
-  - SQLite: Default database for local development.
-  - PyCharm: IDE for Python development.
-  - Git/GitHub: For version control and collaboration.
+8. **Access the application**
+   - Main application: http://127.0.0.1:8000/
+   - Admin panel: http://127.0.0.1:8000/admin/
 
-Steps Completed:
-1. Installed Django and initialized the project.
-2. Set up a working virtual environment.
-3. Created the basic app structure (e.g., `projects` app).
-4. Defined a database schema for `Project` and migrated it.
-5. Tested the server to ensure the project runs locally.
-6. Successfully pushed code to GitHub.
+## Configuration
 
+### Environment Variables
 
-Phase 2: Core Functionality – Task Management (Complete) (8.12)
+Create a `.env` file in the project root with the following variables:
 
-Objective: 
-Building a feature-rich task management system with CRUD (Create, Read, Update, Delete) operations.
+```env
+SECRET_KEY=your-secret-key-here
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+API_KEY=your-api-key-here
+```
 
-Steps:
+### Database Configuration
 
-1. Define a `Task` Model:
-   - Add fields like title, description, completed status, and timestamps.
-   - Create and run migrations to apply changes to the database.
+The application uses SQLite by default. To use PostgreSQL or MySQL:
 
-2. Build Views for Task Management:
-   - List view: Show all tasks in a table or list format.
-   - Detail view: Show details for a single task.
-   - Create view: Allow users to create tasks via a form.
-   - Edit view: Allow users to update existing tasks.
-   - Delete view: Allow users to delete tasks.
-
-3. Create Templates for the Views:
-   - Use Django’s templating system to display tasks.
-   - Use HTML and Bootstrap to make the interface look clean and user-friendly.
-
-4. Integrate URLs:
-   - Add appropriate URL patterns for task-related actions.
-
-5. Test the Features:
-   - Ensure tasks can be added, viewed, edited, and deleted without errors.
-   - Use Django admin to verify the database content.
-
-
-Phase 3: User Authentication and Authorization (Complete) (10.12)
-
-Objective:
-Securing the system by allowing users to manage only their own tasks.
-
-Steps to Follow:
-
-1. Enabling built-in authentication system:
-   - Add user registration and login/logout functionality.
-   - Use Django’s `User` model to associate tasks with specific users.
+1. Install the appropriate database driver:
+   ```bash
+   # For PostgreSQL
+   pip install psycopg2-binary
    
-2. Adding role-based permissions:
-   - Ensure only the task owner can edit or delete tasks.
-   - Use decorators like `@login_required` to restrict access to authenticated users.
+   # For MySQL
+   pip install mysqlclient
+   ```
 
-3. Modify task views to show only the logged-in user’s tasks.
+2. Update your `.env` file:
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+   # or
+   DATABASE_URL=mysql://user:password@localhost:3306/dbname
+   ```
 
+## Usage
 
+### Creating Projects
 
-Phase 4: AI Integration
+1. Navigate to the main page
+2. Click "Add New Project"
+3. Fill in the project details:
+   - Name (required)
+   - Description (required)
+   - Start date (defaults to today)
+   - End date (optional)
+   - Completion status
 
-Objective:
-Adding an AI-powered assistant that provides intelligent recommendations or assistance.
+### Managing Tasks
 
-Steps:
+1. Open a project by clicking on its name
+2. Click "Add Task" to create new tasks
+3. Set task details:
+   - Title (required)
+   - Description (optional)
+   - Priority level (Low, Medium, High, Urgent)
+   - Due date (optional)
+   - Assigned user (optional)
 
-1. Choose the AI Service:
-   - Use the **OpenAI API** for a ChatGPT-like assistant.
-   - Alternatively, use a pre-trained model like Hugging Face's transformers library.
+### Search and Filter
 
-2. Create a Chatbot Interface:
-   - Build a simple form where users can ask questions or request assistance.
-   - Send queries to the AI service and display responses.
+- Use the search bar to find projects by name or description
+- Filter by completion status (All, Active, Completed)
+- Filter by overdue status
+- Sort by various criteria
 
-3. Integrate with Tasks:
-   - Allow the AI to provide task suggestions or summarize overdue tasks.
-   - Example: “You have 3 overdue tasks. Would you like to reschedule them?”
+## API Endpoints
 
+The application includes a REST API for programmatic access:
 
+- `GET /api/projects/` - List all projects
+- `POST /api/projects/` - Create a new project
+- `GET /api/projects/{id}/` - Get project details
+- `PUT /api/projects/{id}/` - Update project
+- `DELETE /api/projects/{id}/` - Delete project
 
-Phase 5: Advanced Features
+Similar endpoints are available for tasks at `/api/tasks/`.
 
-Objective: 
-Adding quality-of-life improvements to the app.
+## Development
 
-Steps:
+### Code Quality
 
-1. Notifications and Reminders:
-   - Use Django Q or Celery to schedule background tasks.
-   - Send email or push notifications for upcoming or overdue tasks.
+The project includes several tools for maintaining code quality:
 
-2. Search and Filters:
-   - Add a search bar to filter tasks by title or description.
-   - Add filters for completed and incomplete tasks.
+```bash
+# Format code with Black
+black .
 
-3. Improved Frontend:
-   - Replace basic templates with a React.js frontend for a more dynamic user experience.
-   - Use REST framework (Django REST Framework) to build an API for the frontend.
+# Sort imports with isort
+isort .
 
-4. Deploy the App:
-   - Choose a hosting provider like Heroku or AWS for deployment.
-   - Switch to PostgreSQL for production.
+# Check for style issues with flake8
+flake8 .
 
+# Run tests
+pytest
+```
 
+### Database Migrations
 
-Timeline
+When making model changes:
 
-Phase                     	 Estimated Time 
-Foundation	Complete
-Task management	Complete
-User authentication	Complete
-AI integration	3-4 days
-Advanced features	4+  days
-Deployment	1-2 days
+```bash
+# Create migrations
+python manage.py makemigrations
 
+# Apply migrations
+python manage.py migrate
+```
 
+## Deployment
 
+### Production Settings
 
-1. Finalizing the `Task` model and migrating it.
-2. Creating views and templates for CRUD operations.
-3. Testing the functionality through Django admin and the browser.
-   
+For production deployment:
+
+1. Set `DEBUG=False` in your environment
+2. Configure a production database
+3. Set up static file serving
+4. Configure proper security settings
+5. Use a production WSGI server like Gunicorn
+
+### Docker Deployment
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+RUN python manage.py collectstatic --noinput
+
+EXPOSE 8000
+CMD ["gunicorn", "ai_assistant.wsgi:application"]
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support and questions, please open an issue in the repository.

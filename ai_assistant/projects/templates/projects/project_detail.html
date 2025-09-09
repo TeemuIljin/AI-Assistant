@@ -1,16 +1,227 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ project.name }}</title>
-     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'projects/style.css' %}">
-</head>
-<body>
-    <h1>{{ project.name }}</h1>
-    <p>{{ project.description }}</p>
-    <p><strong>Start Date:</strong> {{ project.start_date }}</p>
-    <p><strong>End Date:</strong> {{ project.end_date }}</p>
-    <p><strong>Completed:</strong> {{ project.completed }}</p>
-    <a href="{% url 'project_list' %}">Back to Project List</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}{{ project.name }} - AI Assistant{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <!-- Project Header -->
+        <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+                <h1><i class="bi bi-kanban"></i> {{ project.name }}</h1>
+                <p class="text-muted">{{ project.description }}</p>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" 
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i> Actions
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'projects:project_edit' project.pk %}">
+                        <i class="bi bi-pencil"></i> Edit Project
+                    </a></li>
+                    <li><a class="dropdown-item" href="{% url 'projects:task_add' project.pk %}">
+                        <i class="bi bi-plus-circle"></i> Add Task
+                    </a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="{% url 'projects:project_delete' project.pk %}">
+                        <i class="bi bi-trash"></i> Delete Project
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Project Stats -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ project.completion_percentage }}%</h5>
+                        <p class="card-text text-muted">Complete</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">{{ completed_tasks.count }}</h5>
+                        <p class="card-text text-muted">Completed Tasks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">{{ pending_tasks.count }}</h5>
+                        <p class="card-text text-muted">Pending Tasks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">{{ overdue_tasks.count }}</h5>
+                        <p class="card-text text-muted">Overdue Tasks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Progress Bar -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h6 class="card-title">Project Progress</h6>
+                <div class="progress" style="height: 20px;">
+                    <div class="progress-bar" role="progressbar" 
+                         style="width: {{ project.completion_percentage }}%"
+                         aria-valuenow="{{ project.completion_percentage }}" 
+                         aria-valuemin="0" aria-valuemax="100">
+                        {{ project.completion_percentage }}%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Information -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="bi bi-info-circle"></i> Project Information</h6>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Start Date:</strong> {{ project.start_date|date:"F d, Y" }}</p>
+                        {% if project.end_date %}
+                            <p><strong>End Date:</strong> {{ project.end_date|date:"F d, Y" }}</p>
+                        {% endif %}
+                        <p><strong>Status:</strong> 
+                            <span class="badge {% if project.completed %}bg-success{% else %}bg-primary{% endif %}">
+                                {% if project.completed %}Completed{% else %}Active{% endif %}
+                            </span>
+                        </p>
+                        {% if project.created_by %}
+                            <p><strong>Created by:</strong> {{ project.created_by.username }}</p>
+                        {% endif %}
+                        {% if project.is_overdue %}
+                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> This project is overdue!</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="bi bi-list-task"></i> Quick Actions</h6>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'projects:task_add' project.pk %}" class="btn btn-primary w-100 mb-2">
+                            <i class="bi bi-plus-circle"></i> Add New Task
+                        </a>
+                        <a href="{% url 'projects:project_edit' project.pk %}" class="btn btn-outline-secondary w-100 mb-2">
+                            <i class="bi bi-pencil"></i> Edit Project
+                        </a>
+                        <a href="{% url 'projects:project_list' %}" class="btn btn-outline-info w-100">
+                            <i class="bi bi-arrow-left"></i> Back to Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Section -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="mb-0"><i class="bi bi-list-task"></i> Tasks</h6>
+                <a href="{% url 'projects:task_add' project.pk %}" class="btn btn-sm btn-primary">
+                    <i class="bi bi-plus-circle"></i> Add Task
+                </a>
+            </div>
+            <div class="card-body">
+                {% if tasks %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Priority</th>
+                                    <th>Assigned To</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr class="{% if task.completed %}table-success{% elif task.is_overdue %}table-danger{% endif %}">
+                                        <td>
+                                            <strong>{{ task.title }}</strong>
+                                            {% if task.description %}
+                                                <br><small class="text-muted">{{ task.description|truncatewords:10 }}</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{{ task.priority_color }}">
+                                                {{ task.get_priority_display }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if task.assigned_to %}
+                                                {{ task.assigned_to.username }}
+                                            {% else %}
+                                                <span class="text-muted">Unassigned</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if task.due_date %}
+                                                {{ task.due_date|date:"M d, Y" }}
+                                                {% if task.is_overdue %}
+                                                    <br><small class="text-danger">Overdue</small>
+                                                {% endif %}
+                                            {% else %}
+                                                <span class="text-muted">No due date</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge {% if task.completed %}bg-success{% else %}bg-warning{% endif %}">
+                                                {% if task.completed %}Completed{% else %}Pending{% endif %}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <a href="{% url 'projects:task_toggle' task.pk %}" 
+                                                   class="btn btn-outline-{% if task.completed %}warning{% else %}success{% endif %}"
+                                                   title="{% if task.completed %}Mark as pending{% else %}Mark as completed{% endif %}">
+                                                    <i class="bi bi-{% if task.completed %}arrow-counterclockwise{% else %}check{% endif %}"></i>
+                                                </a>
+                                                <a href="{% url 'projects:task_edit' task.pk %}" 
+                                                   class="btn btn-outline-primary"
+                                                   title="Edit task">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a href="{% url 'projects:task_delete' task.pk %}" 
+                                                   class="btn btn-outline-danger"
+                                                   title="Delete task">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-list-task display-4 text-muted"></i>
+                        <h5 class="mt-3">No tasks yet</h5>
+                        <p class="text-muted">Get started by adding your first task to this project.</p>
+                        <a href="{% url 'projects:task_add' project.pk %}" class="btn btn-primary">
+                            <i class="bi bi-plus-circle"></i> Add First Task
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
